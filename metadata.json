@@ -1,0 +1,9 @@
+{
+  "name": "Z5 Esportes",
+  "description": "Plataforma especialista em maratonas e corridas, com gestão de eventos e geração de vídeos promocionais via IA.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
