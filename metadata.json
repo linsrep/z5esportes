@@ -1,5 +1,6 @@
 {
   "name": "Z5 Esportes",
+  "slogan": "Emoçaão em alta frequência",
   "description": "Plataforma especialista em maratonas e corridas, com gestão de eventos e geração de vídeos promocionais via IA.",
   "requestFramePermissions": [
     "camera",
