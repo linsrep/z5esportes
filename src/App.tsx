@@ -30,9 +30,13 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
+      {/* Skip navigation link — first focusable element for keyboard users */}
+      <a href="#main-content" className="skip-link">
+        Ir para o conteúdo principal
+      </a>
       <div className="relative flex min-h-screen flex-col overflow-x-hidden">
         <Header />
-        <main className="flex-1 relative bg-transparent pt-16">
+        <main id="main-content" className="flex-1 relative bg-transparent pt-16">
           <Routes>
             <Route path="/" element={
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
