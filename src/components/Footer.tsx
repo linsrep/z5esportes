@@ -73,7 +73,8 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-50 text-center">
-          <p className="text-[10px] text-slate-400">© 2026 Z5 Esportes. Todos os direitos reservados. Emoção em alta frequência.</p>
+          <p className="text-[14px] text-slate-400">© 2026 Z5 Esportes. Todos os direitos reservados. Emoção em alta frequência.</p>
+          <p className="text-[14px] text-slate-400">Desenvolvido por <a href="https://goatech.com.br" target="_blank" noreffer className="text-primary hover:underline">GOATech</a></p>
         </div>
       </div>
     </footer>

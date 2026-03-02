@@ -69,8 +69,8 @@ export default function Home() {
             <span className="bg-gradient-to-r from-[#FF0000] to-[#FFB800] bg-clip-text text-transparent">desafio</span>
           </h1>
           <p className="text-base md:text-[19px] text-slate-600 max-w-3xl mx-auto mb-16 leading-[1.6] font-medium">
-            A maior plataforma para inscrições em corridas, torneios de futebol, competições <br className="hidden md:block" />
-            de CrossFit e eventos esportivos de elite.
+            A maior plataforma para inscrições em corridas, torneios de futebol <br className="hidden md:block" />
+            e eventos esportivos de elite.
           </p>
 
           {/* Search Bar */}
