@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // Logo served from /public — use absolute path
-const LOGO_URL = '/logo-h.png';
+const LOGO_URL = '/logo-v-slogan.png';
 
 const navItems = [
   { name: 'EVENTOS', path: '/explorar' },

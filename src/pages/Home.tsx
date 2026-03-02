@@ -65,8 +65,8 @@ export default function Home() {
       <section className="relative pt-12 pb-20 px-6 text-center overflow-hidden z-10">
         <div className="relative z-10 mx-auto max-w-5xl">
           <h1 className="text-[56px] md:text-[84px] font-[900] tracking-[-0.04em] text-[#0F172A] leading-[0.95] mb-8">
-            Emoção em <br />
-            <span className="bg-gradient-to-r from-[#FF0000] to-[#FFB800] bg-clip-text text-transparent">alta frequência</span>
+            Encontre seu próximo <br />
+            <span className="bg-gradient-to-r from-[#FF0000] to-[#FFB800] bg-clip-text text-transparent">desafio</span>
           </h1>
           <p className="text-base md:text-[19px] text-slate-600 max-w-3xl mx-auto mb-16 leading-[1.6] font-medium">
             A maior plataforma para inscrições em corridas, torneios de futebol, competições <br className="hidden md:block" />

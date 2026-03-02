@@ -10,10 +10,11 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex flex-row items-center gap-3 mb-4">
               <img alt="Z5 Esportes" className="h-6 w-auto object-contain" src={FOOTER_LOGO} />
+              <br className="hidden md:hidden flex flex-row" />  
               <span className="font-bold text-lg tracking-tight text-slate-900">
-                Emoção em <span className="text-primary">alta frequência</span>
+                Encontre seu próximo <span className="text-primary">desafio</span>
               </span>
             </div>
             <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
@@ -72,7 +73,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-50 text-center">
-          <p className="text-[10px] text-slate-400">© 2026 Z5 Esportes. Todos os direitos reservados. Focados no seu desempenho.</p>
+          <p className="text-[10px] text-slate-400">© 2026 Z5 Esportes. Todos os direitos reservados. Emoção em alta frequência.</p>
         </div>
       </div>
     </footer>
