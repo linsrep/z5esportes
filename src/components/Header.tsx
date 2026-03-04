@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full bg-white/60 backdrop-blur-2xl border-b border-white/20 shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-10">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-3 lg:px-10">
 
         {/* Logo */}
         <Link
