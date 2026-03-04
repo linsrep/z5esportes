@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { appInfo } from '../data/appInfo';
 
-const FOOTER_LOGO = './logo-h.png';
+const FOOTER_LOGO = './logo-h-slogan.png';
 
 export default function Footer() {
   return (
@@ -11,14 +12,11 @@ export default function Footer() {
           {/* Brand column */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex flex-row items-center gap-3 mb-4">
-              <img alt="Z5 Esportes" className="h-6 w-auto object-contain" src={FOOTER_LOGO} />
-              <br className="hidden md:hidden flex flex-row" />  
-              <span className="font-bold text-lg tracking-tight text-slate-900">
-                Encontre seu próximo <span className="text-primary">desafio</span>
-              </span>
+              <img alt="Z5 Esportes" className="h-16 w-auto object-contain" src={FOOTER_LOGO} />
+
             </div>
             <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
-              A plataforma definitiva para conectar atletas e organizadores de eventos esportivos em todo o Brasil. Performance, paixão e tecnologia.
+              {appInfo.description}
             </p>
             <div className="flex gap-4 mt-6">
               <a
@@ -73,8 +71,8 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-50 text-center">
-          <p className="text-[14px] text-slate-400">© 2026 Z5 Esportes. Todos os direitos reservados. Emoção em alta frequência.</p>
-          <p className="text-[14px] text-slate-400">Desenvolvido por <a href="https://goatech.com.br" target="_blank" noreffer className="text-primary hover:underline">GOATech</a></p>
+          <p className="text-[14px] text-slate-400">© 2026 - {appInfo.title}. Todos os direitos reservados.</p>
+          <p className="text-[14px] text-slate-400">{appInfo.version} | Desenvolvido por <a href="https://goatech.com.br" target="_blank" noreffer className="text-primary hover:underline">GOATech</a></p>
         </div>
       </div>
     </footer>

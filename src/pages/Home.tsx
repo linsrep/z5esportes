@@ -346,11 +346,13 @@ export default function Home() {
         <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-10">Grandes organizadores que confiam na Z5</p>
         <div className="flex flex-wrap justify-center items-center gap-16 opacity-60 grayscale hover:grayscale-0 transition-all">
           {[
-            { name: 'Nike', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg' },
             { name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
-            { name: 'Red Bull', logo: 'https://upload.wikimedia.org/wikipedia/en/f/f5/Red_Bull_Racing_logo.svg' },
-            { name: 'Ironman', logo: 'https://upload.wikimedia.org/wikipedia/en/0/05/Ironman_Triathlon_logo.svg' },
-            { name: 'Spartan Race', logo: 'https://upload.wikimedia.org/wikipedia/en/b/b3/Spartan_Race_logo.svg' },
+            { name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
+            { name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
+            { name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
+            { name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
+            { name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
+            { name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
           ].map((brand) => (
             <img key={brand.name} src={brand.logo} alt={brand.name} className="h-12 w-auto object-contain" loading="lazy" />
           ))}
