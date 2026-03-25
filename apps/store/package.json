@@ -1,0 +1,11 @@
+{
+  "name": "@z5/app-store",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "echo \"apps/store ainda não foi implementado\"",
+    "build": "echo \"apps/store ainda não possui etapa de build\"",
+    "lint": "echo \"apps/store ainda não possui etapa de lint\""
+  }
+}

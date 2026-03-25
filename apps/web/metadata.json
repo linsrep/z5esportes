@@ -1,0 +1,10 @@
+{
+  "name": "Z5 Esportes",
+  "slogan": "Emoção em alta frequência",
+  "description": "Emoção em alta frequência",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
