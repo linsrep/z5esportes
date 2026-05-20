@@ -1,22 +1,22 @@
 export default function Termos() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-20">
-      <h1 className="text-4xl font-black text-slate-900 mb-8 tracking-tight">Termos e Condições</h1>
-      <div className="prose prose-slate max-w-none text-slate-600 space-y-6">
-        <p className="font-medium">Bem-vindo à Z5 Esportes. Ao acessar nossa plataforma, você concorda com os seguintes termos:</p>
+    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-20">
+      <h1 className="text-3xl sm:text-4xl font-black text-slate-900 mb-6 sm:mb-8 tracking-tight">Termos e Condições</h1>
+      <div className="prose prose-slate max-w-none text-slate-600 space-y-5 sm:space-y-6">
+        <p className="font-medium text-sm sm:text-base">Bem-vindo à Z5 Esportes. Ao acessar nossa plataforma, você concorda com os seguintes termos:</p>
         
         <section>
-          <h2 className="text-xl font-bold text-slate-900 mb-2">1. Uso da Plataforma</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">1. Uso da Plataforma</h2>
           <p>A Z5 Esportes é uma plataforma intermediadora de inscrições para eventos esportivos. Não somos os organizadores diretos dos eventos, exceto quando explicitamente indicado.</p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-slate-900 mb-2">2. Inscrições e Pagamentos</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">2. Inscrições e Pagamentos</h2>
           <p>As inscrições são pessoais e intransferíveis, salvo autorização do organizador. O processamento de pagamentos é realizado por parceiros seguros.</p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-slate-900 mb-2">3. Cancelamentos</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">3. Cancelamentos</h2>
           <p>Políticas de reembolso seguem o Código de Defesa do Consumidor e as regras específicas de cada organizador de evento.</p>
         </section>
 

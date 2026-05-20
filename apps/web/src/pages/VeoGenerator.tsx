@@ -40,20 +40,20 @@ export default function VeoGenerator() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-12">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl mb-4">
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
+      <div className="text-center mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl mb-4">
           Transforme Fotos em <span className="text-primary">Vídeos Épicos</span>
         </h2>
-        <p className="text-slate-600">
+        <p className="text-sm sm:text-base text-slate-600">
           Utilize a tecnologia Veo da Google para animar suas fotos de corrida e criar conteúdos promocionais incríveis.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         <div className="space-y-6">
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 uppercase tracking-tight">1. Upload da Foto</label>
+            <label className="text-xs sm:text-sm font-bold text-slate-700 uppercase tracking-tight">1. Upload da Foto</label>
             <div 
               className={`relative aspect-video rounded-xl border-2 border-dashed flex flex-col items-center justify-center transition-all overflow-hidden ${
                 image ? 'border-primary/50 bg-slate-50' : 'border-slate-200 hover:border-primary/30 bg-white'
@@ -80,21 +80,21 @@ export default function VeoGenerator() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 uppercase tracking-tight">2. Descreva a Animação</label>
+            <label className="text-xs sm:text-sm font-bold text-slate-700 uppercase tracking-tight">2. Descreva a Animação</label>
             <textarea
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Ex: Um corredor cruzando a linha de chegada com fogos de artifício ao fundo..."
-              className="w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm min-h-[100px]"
+              className="w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm min-h-[100px] px-4 py-3.5"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 uppercase tracking-tight">3. Formato</label>
-            <div className="flex gap-4">
+            <label className="text-xs sm:text-sm font-bold text-slate-700 uppercase tracking-tight">3. Formato</label>
+            <div className="flex gap-3 sm:gap-4">
               <button 
                 onClick={() => setAspectRatio('16:9')}
-                className={`flex-1 py-2 px-4 rounded-lg border text-xs font-bold transition-all ${
+                className={`flex-1 py-3 px-3 sm:px-4 rounded-lg border text-[11px] sm:text-xs font-bold transition-all ${
                   aspectRatio === '16:9' ? 'bg-primary text-white border-primary' : 'bg-white text-slate-600 border-slate-200'
                 }`}
               >
@@ -102,7 +102,7 @@ export default function VeoGenerator() {
               </button>
               <button 
                 onClick={() => setAspectRatio('9:16')}
-                className={`flex-1 py-2 px-4 rounded-lg border text-xs font-bold transition-all ${
+                className={`flex-1 py-3 px-3 sm:px-4 rounded-lg border text-[11px] sm:text-xs font-bold transition-all ${
                   aspectRatio === '9:16' ? 'bg-primary text-white border-primary' : 'bg-white text-slate-600 border-slate-200'
                 }`}
               >
@@ -114,7 +114,7 @@ export default function VeoGenerator() {
           <button
             onClick={handleGenerate}
             disabled={!image || isGenerating}
-            className="w-full py-4 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+            className="w-full py-3.5 sm:py-4 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
           >
             {isGenerating ? (
               <>
@@ -131,7 +131,7 @@ export default function VeoGenerator() {
         </div>
 
         <div className="space-y-6">
-          <label className="text-sm font-bold text-slate-700 uppercase tracking-tight">Resultado</label>
+          <label className="text-xs sm:text-sm font-bold text-slate-700 uppercase tracking-tight">Resultado</label>
           <div className="aspect-video rounded-xl bg-slate-900 flex flex-col items-center justify-center text-white overflow-hidden relative">
             <AnimatePresence mode="wait">
               {isGenerating ? (

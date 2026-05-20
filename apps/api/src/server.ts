@@ -16,9 +16,17 @@ const apiPort = Number(process.env.API_PORT ?? '3333');
 const frontendUrl = process.env.FRONTEND_URL ?? 'http://localhost:3000';
 const databaseUrl = process.env.DATABASE_URL;
 const geminiApiKey = process.env.GEMINI_API_KEY;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
 
 const app = express();
 const db = databaseUrl ? new Pool({connectionString: databaseUrl}) : null;
+const registeredEmails = new Set<string>();
+const registeredCpfs = new Set<string>();
+
+function normalizeCpf(value: string) {
+  return value.replace(/\D/g, '');
+}
 
 app.use(
   cors({
@@ -45,6 +53,55 @@ app.get('/health', async (_req, res) => {
     status: 'ok',
     database,
     frontendUrl,
+  });
+});
+
+app.post('/api/auth/register', async (req, res) => {
+  const {name, cpf, email, password} = req.body as {
+    name?: string;
+    cpf?: string;
+    email?: string;
+    password?: string;
+  };
+
+  const normalizedName = name?.trim() ?? '';
+  const normalizedCpf = normalizeCpf(cpf ?? '');
+  const normalizedEmail = email?.trim().toLowerCase() ?? '';
+
+  if (!normalizedName) {
+    return res.status(400).json({error: 'Informe seu nome completo.'});
+  }
+
+  if (normalizedCpf.length !== 11) {
+    return res.status(400).json({error: 'Informe um CPF valido.'});
+  }
+
+  if (!EMAIL_REGEX.test(normalizedEmail)) {
+    return res.status(400).json({error: 'Informe um e-mail valido.'});
+  }
+
+  if (!PASSWORD_REGEX.test(password ?? '')) {
+    return res.status(400).json({error: 'Use uma senha com no minimo 8 caracteres, letra e numero.'});
+  }
+
+  if (registeredEmails.has(normalizedEmail)) {
+    return res.status(409).json({error: 'Este e-mail ja foi cadastrado.'});
+  }
+
+  if (registeredCpfs.has(normalizedCpf)) {
+    return res.status(409).json({error: 'Este CPF ja foi cadastrado.'});
+  }
+
+  registeredEmails.add(normalizedEmail);
+  registeredCpfs.add(normalizedCpf);
+
+  return res.status(201).json({
+    message: 'Cadastro realizado com sucesso.',
+    user: {
+      name: normalizedName,
+      email: normalizedEmail,
+      cpf: normalizedCpf,
+    },
   });
 });
 

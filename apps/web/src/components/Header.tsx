@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full bg-white/60 backdrop-blur-2xl border-b border-white/20 shadow-sm">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-3 lg:px-10">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3 lg:px-10">
 
         {/* Logo */}
         <Link
@@ -31,7 +31,7 @@ export default function Header() {
           <img
             src={LOGO_URL}
             alt="Z5 Esportes"
-            className="h-12 w-auto object-contain"
+            className="h-10 w-auto object-contain sm:h-12"
           />
         </Link>
 
@@ -72,7 +72,7 @@ export default function Header() {
 
           {/* Mobile hamburger button */}
           <button
-            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
+            className="md:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-nav"
@@ -90,7 +90,7 @@ export default function Header() {
         <nav
           id="mobile-nav"
           aria-label="Menu de navegação mobile"
-          className="md:hidden border-t border-white/20 bg-white/95 backdrop-blur-2xl px-6 py-4"
+          className="md:hidden border-t border-white/20 bg-white/95 backdrop-blur-2xl px-4 py-4 sm:px-6"
         >
           <ul className="flex flex-col gap-1">
             {navItems.map((item) => (
@@ -100,7 +100,7 @@ export default function Header() {
                   aria-current={location.pathname === item.path ? 'page' : undefined}
                   onClick={closeMobileMenu}
                   className={cn(
-                    'block py-2.5 text-sm font-medium transition-colors hover:text-primary',
+                    'block rounded-xl py-3 px-1 text-sm font-medium transition-colors hover:text-primary',
                     location.pathname === item.path ? 'text-primary' : 'text-slate-600',
                   )}
                 >
@@ -119,7 +119,7 @@ export default function Header() {
               <Link
                 to="/cadastro"
                 onClick={closeMobileMenu}
-                className="rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white text-center shadow-md shadow-primary/20 hover:bg-red-700 transition-all"
+                className="rounded-xl bg-primary px-5 py-3 text-sm font-bold text-white text-center shadow-md shadow-primary/20 hover:bg-red-700 transition-all"
               >
                 Cadastrar
               </Link>

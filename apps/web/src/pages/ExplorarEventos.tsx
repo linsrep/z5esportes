@@ -85,26 +85,26 @@ export default function ExplorarEventos() {
   const hasActiveFilters = searchQuery || locationFilter || distanceFilter !== 'Distância (km)' || dateFilter !== 'Data do Evento' || priceFilter !== 'Faixa de Preço';
 
   return (
-    <div className="mx-auto max-w-[1600px] px-6 py-12 lg:px-10">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+    <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-6 sm:py-12 lg:px-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6 mb-8 sm:mb-12">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">Explorar Eventos</h1>
-          <p className="text-slate-500 mt-2 font-medium">Encontre os melhores desafios perto de você.</p>
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Explorar Eventos</h1>
+          <p className="text-sm sm:text-base text-slate-500 mt-2 font-medium">Encontre os melhores desafios perto de você.</p>
         </div>
         <div className="flex items-center gap-2">
-          <button className="flex items-center gap-2 px-6 py-3 bg-white/40 backdrop-blur-md border border-white/20 rounded-2xl text-sm font-bold text-slate-700 hover:bg-white/60 transition-all">
+          <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-white/40 backdrop-blur-md border border-white/20 rounded-2xl text-sm font-bold text-slate-700 hover:bg-white/60 transition-all">
             <Map className="w-4 h-4" />
             Ver no Mapa
           </button>
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
         {/* Mobile Filters Toggle */}
         <div className="lg:hidden">
           <button 
             onClick={() => setShowFilters(!showFilters)}
-            className="w-full flex items-center justify-between px-6 py-4 bg-white/60 backdrop-blur-xl border border-white/20 rounded-2xl text-sm font-black uppercase tracking-widest text-slate-900 shadow-sm"
+            className="w-full flex items-center justify-between px-5 sm:px-6 py-4 bg-white/60 backdrop-blur-xl border border-white/20 rounded-2xl text-sm font-black uppercase tracking-widest text-slate-900 shadow-sm"
           >
             <div className="flex items-center gap-2">
               <SlidersHorizontal className="w-4 h-4 text-primary" />
@@ -116,7 +116,7 @@ export default function ExplorarEventos() {
 
         {/* Left Column: Filters (Ecommerce Style) */}
         <aside className={`lg:w-64 shrink-0 space-y-8 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-          <div className="bg-white/40 backdrop-blur-md rounded-[32px] border border-white/20 p-8 shadow-sm">
+          <div className="bg-white/40 backdrop-blur-md rounded-[28px] sm:rounded-[32px] border border-white/20 p-5 sm:p-8 shadow-sm">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Filtros</h3>
               {hasActiveFilters && (
@@ -129,7 +129,7 @@ export default function ExplorarEventos() {
               )}
             </div>
             
-            <div className="space-y-6">
+            <div className="space-y-5 sm:space-y-6">
               {/* Search */}
               <div>
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 block">Busca</label>
@@ -140,7 +140,7 @@ export default function ExplorarEventos() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Nome do evento..."
-                    className="w-full pl-10 pr-4 py-3 bg-white border border-slate-100 rounded-xl text-xs font-bold focus:ring-2 focus:ring-primary/20 transition-all"
+                    className="w-full pl-10 pr-4 py-3.5 bg-white border border-slate-100 rounded-xl text-xs sm:text-sm font-bold focus:ring-2 focus:ring-primary/20 transition-all"
                   />
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function ExplorarEventos() {
                     value={locationFilter}
                     onChange={(e) => setLocationFilter(e.target.value)}
                     placeholder="Cidade ou estado..."
-                    className="w-full pl-10 pr-4 py-3 bg-white border border-slate-100 rounded-xl text-xs font-bold focus:ring-2 focus:ring-primary/20 transition-all"
+                    className="w-full pl-10 pr-4 py-3.5 bg-white border border-slate-100 rounded-xl text-xs sm:text-sm font-bold focus:ring-2 focus:ring-primary/20 transition-all"
                   />
                 </div>
               </div>
@@ -166,7 +166,7 @@ export default function ExplorarEventos() {
                 <select 
                   value={distanceFilter}
                   onChange={(e) => setDistanceFilter(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-slate-100 rounded-xl text-xs font-bold focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
+                  className="w-full px-4 py-3.5 bg-white border border-slate-100 rounded-xl text-xs sm:text-sm font-bold focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
                 >
                   <option>Distância (km)</option>
                   <option>Até 5km</option>
@@ -182,7 +182,7 @@ export default function ExplorarEventos() {
                 <select 
                   value={dateFilter}
                   onChange={(e) => setDateFilter(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-slate-100 rounded-xl text-xs font-bold focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
+                  className="w-full px-4 py-3.5 bg-white border border-slate-100 rounded-xl text-xs sm:text-sm font-bold focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
                 >
                   <option>Data do Evento</option>
                   <option>Este Fim de Semana</option>
@@ -200,7 +200,7 @@ export default function ExplorarEventos() {
                     <button 
                       key={price}
                       onClick={() => setPriceFilter(price)}
-                      className={`w-full text-left px-4 py-2 rounded-lg text-[11px] font-bold transition-all ${priceFilter === price ? 'bg-primary text-white' : 'hover:bg-slate-50 text-slate-600'}`}
+                      className={`w-full text-left px-4 py-2.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all ${priceFilter === price ? 'bg-primary text-white' : 'hover:bg-slate-50 text-slate-600'}`}
                     >
                       {price}
                     </button>
@@ -214,7 +214,7 @@ export default function ExplorarEventos() {
         {/* Middle Column: Events Grid */}
         <main className="flex-1">
           {filteredEvents.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {filteredEvents.map(event => (
                 <EventCard 
                   key={event.id} 
@@ -224,12 +224,12 @@ export default function ExplorarEventos() {
               ))}
             </div>
           ) : (
-            <div className="py-24 text-center bg-white/20 backdrop-blur-md rounded-[32px] border border-white/10">
+            <div className="py-16 sm:py-24 px-4 text-center bg-white/20 backdrop-blur-md rounded-[28px] sm:rounded-[32px] border border-white/10">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 mb-6">
                 <Search className="w-8 h-8 text-slate-400" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Nenhum evento encontrado</h3>
-              <p className="text-slate-500 max-w-xs mx-auto mb-8">Tente ajustar seus filtros para encontrar o que procura.</p>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">Nenhum evento encontrado</h3>
+              <p className="text-sm text-slate-500 max-w-xs mx-auto mb-8">Tente ajustar seus filtros para encontrar o que procura.</p>
               <button 
                 onClick={clearFilters}
                 className="px-8 py-3 bg-primary text-white rounded-xl font-bold text-sm hover:bg-red-700 transition-all"

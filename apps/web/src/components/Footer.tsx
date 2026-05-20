@@ -5,17 +5,17 @@ const FOOTER_LOGO = './logo-h-slogan.png';
 
 export default function Footer() {
   return (
-    <footer className="bg-white/40 backdrop-blur-xl py-12 border-t border-white/20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+    <footer className="bg-white/40 backdrop-blur-xl py-10 sm:py-12 border-t border-white/20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-10 md:mb-12">
 
           {/* Brand column */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex flex-row items-center gap-3 mb-4">
-              <img alt="Z5 Esportes" className="h-16 w-auto object-contain" src={FOOTER_LOGO} />
+              <img alt="Z5 Esportes" className="h-14 w-auto object-contain sm:h-16" src={FOOTER_LOGO} />
 
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
+            <p className="text-sm sm:text-xs text-slate-500 leading-relaxed max-w-xs">
               {appInfo.description}
             </p>
             <div className="flex gap-4 mt-6">
@@ -71,8 +71,8 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-50 text-center">
-          <p className="text-[14px] text-slate-400">© 2026 - {appInfo.title}. Todos os direitos reservados.</p>
-          <p className="text-[14px] text-slate-400">{appInfo.version} | Desenvolvido por <a href="https://goatech.com.br" target="_blank" noreffer className="text-primary hover:underline">GOATech</a></p>
+          <p className="text-xs sm:text-[14px] text-slate-400">© 2026 - {appInfo.title}. Todos os direitos reservados.</p>
+          <p className="text-xs sm:text-[14px] text-slate-400">{appInfo.version} | Desenvolvido por <a href="https://goatech.com.br" target="_blank" noreffer className="text-primary hover:underline">GOATech</a></p>
         </div>
       </div>
     </footer>

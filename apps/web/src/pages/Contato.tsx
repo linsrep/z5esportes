@@ -2,15 +2,15 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Contato() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 mb-6 tracking-tight">Fale Conosco</h1>
-          <p className="text-slate-500 mb-10 leading-relaxed">
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 mb-5 sm:mb-6 tracking-tight">Fale Conosco</h1>
+          <p className="text-sm sm:text-base text-slate-500 mb-8 sm:mb-10 leading-relaxed">
             Dúvidas sobre sua inscrição ou quer organizar um evento com a gente? Nossa equipe está pronta para ajudar.
           </p>
           
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-primary">
                 <Mail className="w-5 h-5" />
@@ -43,21 +43,21 @@ export default function Contato() {
           </div>
         </div>
 
-        <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50">
+        <div className="bg-white p-5 sm:p-8 rounded-[28px] sm:rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50">
           <form className="space-y-4">
             <div>
               <label className="text-[10px] font-bold text-slate-900 uppercase mb-1 block">Nome Completo</label>
-              <input type="text" className="w-full rounded-xl border-slate-100 bg-slate-50 focus:ring-primary focus:border-primary text-sm" placeholder="Seu nome" />
+              <input type="text" className="w-full rounded-xl border-slate-100 bg-slate-50 focus:ring-primary focus:border-primary text-sm px-4 py-3.5" placeholder="Seu nome" />
             </div>
             <div>
               <label className="text-[10px] font-bold text-slate-900 uppercase mb-1 block">E-mail</label>
-              <input type="email" className="w-full rounded-xl border-slate-100 bg-slate-50 focus:ring-primary focus:border-primary text-sm" placeholder="seu@email.com" />
+              <input type="email" className="w-full rounded-xl border-slate-100 bg-slate-50 focus:ring-primary focus:border-primary text-sm px-4 py-3.5" placeholder="seu@email.com" />
             </div>
             <div>
               <label className="text-[10px] font-bold text-slate-900 uppercase mb-1 block">Mensagem</label>
-              <textarea className="w-full rounded-xl border-slate-100 bg-slate-50 focus:ring-primary focus:border-primary text-sm min-h-[120px]" placeholder="Como podemos ajudar?"></textarea>
+              <textarea className="w-full rounded-xl border-slate-100 bg-slate-50 focus:ring-primary focus:border-primary text-sm min-h-[120px] px-4 py-3.5" placeholder="Como podemos ajudar?"></textarea>
             </div>
-            <button className="w-full bg-primary text-white py-4 rounded-xl font-bold text-xs hover:bg-red-700 transition-all shadow-lg shadow-red-500/20">
+            <button className="w-full bg-primary text-white py-3.5 sm:py-4 rounded-xl font-bold text-xs hover:bg-red-700 transition-all shadow-lg shadow-red-500/20">
               Enviar Mensagem
             </button>
           </form>

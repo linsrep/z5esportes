@@ -16,7 +16,12 @@ const FOCUSABLE_SELECTORS =
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 'md' }) => {
   const isFull = size === 'full';
   const modalRef = useRef<HTMLDivElement>(null);
+  const onCloseRef = useRef(onClose);
   const titleId = useId();
+
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   // Focus trap, Escape key, body scroll lock, focus restoration
   useEffect(() => {
@@ -37,7 +42,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        onCloseRef.current();
         return;
       }
 
@@ -73,7 +78,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
       // Restore focus to the element that triggered the modal
       previouslyFocused?.focus();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
@@ -91,7 +96,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
 
           {/* Modal positioner — pointer-events-none so backdrop click works */}
           <div
-            className={`fixed inset-0 z-[70] flex items-center justify-center pointer-events-none ${isFull ? 'p-0' : 'p-4'}`}
+            className={`fixed inset-0 z-[70] flex items-center justify-center pointer-events-none ${isFull ? 'p-0' : 'p-3 sm:p-4'}`}
           >
             <motion.div
               ref={modalRef}
@@ -105,30 +110,30 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className={`
                 bg-white/90 backdrop-blur-2xl shadow-2xl border border-white/20 pointer-events-auto relative overflow-hidden flex flex-col
-                ${isFull ? 'w-full h-full rounded-none' : 'w-full max-w-md rounded-[32px] p-8'}
+                ${isFull ? 'w-full h-full rounded-none' : 'w-full max-w-md rounded-[28px] sm:rounded-[32px] p-5 sm:p-8'}
               `}
             >
               {/* Header */}
-              <div className={`${isFull ? 'p-8 border-b border-slate-100' : 'mb-6'}`}>
+              <div className={`${isFull ? 'p-5 sm:p-8 border-b border-slate-100' : 'mb-5 sm:mb-6'}`}>
                 <div className={`${isFull ? 'max-w-7xl mx-auto' : ''} flex items-center justify-between`}>
                   <h2
                     id={titleId}
-                    className={`${isFull ? 'text-3xl font-black' : 'text-xl font-bold'} text-slate-900`}
+                    className={`${isFull ? 'text-2xl sm:text-3xl font-black' : 'text-lg sm:text-xl font-bold'} text-slate-900`}
                   >
                     {title}
                   </h2>
                   <button
                     onClick={onClose}
                     aria-label="Fechar"
-                    className="p-3 rounded-full hover:bg-slate-100 transition-colors text-slate-400 hover:text-slate-900"
+                    className="p-2.5 sm:p-3 rounded-full hover:bg-slate-100 transition-colors text-slate-400 hover:text-slate-900"
                   >
-                    <X className={isFull ? 'w-8 h-8' : 'w-5 h-5'} aria-hidden="true" />
+                    <X className={isFull ? 'w-6 h-6 sm:w-8 sm:h-8' : 'w-5 h-5'} aria-hidden="true" />
                   </button>
                 </div>
               </div>
 
               {/* Body */}
-              <div className={`${isFull ? 'flex-1 overflow-y-auto p-8' : ''}`}>
+              <div className={`${isFull ? 'flex-1 overflow-y-auto p-5 sm:p-8' : ''}`}>
                 {children}
               </div>
 
