@@ -1,4 +1,6 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3333';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { auth, db } from '../lib/firebase';
 
 type RegisterPayload = {
   name: string;
@@ -8,27 +10,56 @@ type RegisterPayload = {
 };
 
 export const registerUser = async (payload: RegisterPayload) => {
-  let response: Response;
-
   try {
-    response = await fetch(`${API_BASE_URL}/api/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
+    const userCredential = await createUserWithEmailAndPassword(auth, payload.email, payload.password);
+    const user = userCredential.user;
+
+    await updateProfile(user, {
+      displayName: payload.name,
     });
-  } catch {
-    throw new Error('Nao foi possivel conectar com a API. Verifique se o servidor esta rodando.');
+
+    if (db) {
+      await setDoc(doc(db, 'users', user.uid), {
+        uid: user.uid,
+        name: payload.name,
+        cpf: payload.cpf,
+        email: payload.email,
+        createdAt: serverTimestamp(),
+      });
+    } else {
+      // Firestore not available for this project — log a warning and continue.
+      // eslint-disable-next-line no-console
+      console.warn('@firebase/firestore: Firestore not available, skipping user profile write');
+    }
+
+    return {
+      message: 'Cadastro realizado com sucesso.',
+      uid: user.uid,
+      email: user.email,
+      name: payload.name,
+    };
+  } catch (error) {
+    if (error instanceof Error) {
+      const message = error.message.replace('Firebase: ', '');
+      throw new Error(message);
+    }
+    throw new Error('Nao foi possivel concluir o cadastro agora.');
   }
+};
 
-  const data = (await response.json().catch(() => null)) as {error?: string; message?: string} | null;
-
-  if (!response.ok) {
-    throw new Error(data?.error ?? 'Nao foi possivel concluir o cadastro agora.');
+export const loginUser = async (email: string, password: string) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    if (error instanceof Error) {
+      const message = error.message.replace('Firebase: ', '');
+      throw new Error(message);
+    }
+    throw new Error('Nao foi possivel fazer login.');
   }
+};
 
-  return {
-    message: data?.message ?? 'Cadastro realizado com sucesso.',
-  };
+export const logoutUser = async () => {
+  await signOut(auth);
 };

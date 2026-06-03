@@ -1,18 +1,48 @@
-import { useParams, Link } from 'react-router-dom';
-import { FEATURED_EVENTS } from '../lib/utils';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { FEATURED_EVENTS, type Event } from '../lib/utils';
 import { Calendar, MapPin, Clock, Share2, Heart, ChevronRight, Info, Award, FileText, Users, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useState } from 'react';
 import Toast from '../components/Toast';
+import EventMap from '../components/EventMap';
+import { setJsonCookie } from '../lib/cookies';
+import { getAuthUser } from '../lib/auth';
+import { fetchEventById } from '../services/eventService';
 
 export default function EventoDetalhes() {
   const { id } = useParams();
-  const event = FEATURED_EVENTS.find(e => e.id === id) || FEATURED_EVENTS[0];
+  const [apiEvent, setApiEvent] = useState<Event | null>(null);
+  const event = apiEvent || FEATURED_EVENTS.find((e) => e.id === id) || FEATURED_EVENTS[0];
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('info');
   const [showToast, setShowToast] = useState(false);
 
+  useEffect(() => {
+    if (!id) return;
+    fetchEventById(id).then((data) => setApiEvent(data)).catch(() => {});
+  }, [id]);
+
   const handleRegister = () => {
+    const user = getAuthUser();
+    setJsonCookie('z5_selected_event', {
+      id: event.id,
+      title: event.title,
+      date: event.date,
+      location: event.location,
+      price: event.price,
+      tag: event.tag,
+      extra_items: event.extra_items,
+    });
+
     setShowToast(true);
+    
+    if (user) {
+      // Usuário já logado - ir direto para confirmação
+      navigate('/evento/confirmacao');
+    } else {
+      // Usuário não logado - ir para login
+      navigate('/login');
+    }
   };
 
   const tabs = [
@@ -125,6 +155,13 @@ export default function EventoDetalhes() {
                       </div>
                     ))}
                   </div>
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-4 mt-8">Localização do Evento:</h3>
+                  <EventMap 
+                    location={event.location} 
+                    latitude={-23.5505}
+                    longitude={-46.6333}
+                    title={event.title}
+                  />
                 </div>
               )}
 
@@ -232,6 +269,22 @@ export default function EventoDetalhes() {
                 >
                   Inscrever-se Agora
                 </button>
+                {event.extra_items && event.extra_items.length > 0 && (
+                  <div className="rounded-[24px] border border-white/20 bg-white/70 p-4 text-slate-700">
+                    <h4 className="text-sm font-black mb-3">Itens opcionais</h4>
+                    <ul className="space-y-3">
+                      {event.extra_items.map((item, index) => (
+                        <li key={index} className="rounded-2xl border border-slate-200 bg-slate-50 p-3">
+                          <div className="flex items-center justify-between gap-4">
+                            <p className="font-black text-sm">{item.name}</p>
+                            <span className="text-xs font-bold text-slate-500">{item.price}</span>
+                          </div>
+                          {item.description && <p className="mt-2 text-xs text-slate-500">{item.description}</p>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 
                 <div className="flex gap-2">
                   <button className="flex-1 flex items-center justify-center gap-2 py-3.5 sm:py-4 bg-white border border-slate-200 rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest text-slate-700 hover:bg-slate-50 transition-all">

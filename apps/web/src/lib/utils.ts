@@ -8,12 +8,20 @@ export function cn(...inputs: ClassValue[]) {
 export interface Event {
   id: string;
   title: string;
+  description?: string;
   date: string;
   location: string;
   price: string;
-  image: string;
-  tag: string;
-  type: 'individual' | 'team';
+  image?: string;
+  tag?: string;
+  type?: 'individual' | 'team';
+  is_published?: boolean;
+  extra_items?: Array<{
+    id?: string;
+    name: string;
+    price: string;
+    description?: string;
+  }>;
 }
 
 export interface Trend {

@@ -1,8 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Toast from '../components/Toast';
+import { deleteCookie, getJsonCookie, SelectedEvent } from '../lib/cookies';
 import { registerUser } from '../services/authService';
+import { setAuthUser } from '../lib/auth';
 
 type FormValues = {
   name: string;
@@ -134,6 +136,7 @@ function getPasswordStrength(password: string): PasswordStrength | null {
 }
 
 export default function Cadastro() {
+  const [selectedEvent, setSelectedEvent] = useState<SelectedEvent | null>(null);
   const [values, setValues] = useState<FormValues>({
     name: '',
     cpf: '',
@@ -141,11 +144,20 @@ export default function Cadastro() {
     password: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitFeedback, setSubmitFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [showToast, setShowToast] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedEvent = getJsonCookie<SelectedEvent>('z5_selected_event');
+    if (savedEvent) {
+      setSelectedEvent(savedEvent);
+    }
+  }, []);
 
   const passwordStrength = getPasswordStrength(values.password);
 
@@ -189,7 +201,14 @@ export default function Cadastro() {
     setShowErrors(true);
     setErrors(nextErrors);
 
-    if (Object.values(nextErrors).some(Boolean)) {
+    if (Object.values(nextErrors).some(Boolean) || !termsAccepted) {
+      if (!termsAccepted) {
+        setSubmitFeedback({
+          type: 'error',
+          message: 'Você deve aceitar os Termos de Uso e a Política de Privacidade.',
+        });
+        setShowToast(true);
+      }
       return;
     }
 
@@ -198,6 +217,11 @@ export default function Cadastro() {
 
     try {
       const result = await registerUser(values);
+      setAuthUser({
+        name: values.name,
+        email: values.email,
+        role: 'athlete',
+      });
 
       setSubmitFeedback({
         type: 'success',
@@ -213,6 +237,9 @@ export default function Cadastro() {
       setErrors({});
       setShowErrors(false);
       setShowPassword(false);
+
+      const hasExtras = selectedEvent?.extra_items?.length > 0;
+      navigate(hasExtras ? '/evento/adicionais' : '/painel');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Nao foi possivel concluir o cadastro agora.';
 
@@ -240,6 +267,16 @@ export default function Cadastro() {
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2 tracking-tight">Crie sua conta</h1>
           <p className="text-xs text-slate-500">Junte-se à maior comunidade esportiva do Brasil.</p>
         </div>
+
+        {selectedEvent && (
+          <div className="mb-6 rounded-3xl border border-primary/20 bg-primary/5 p-4 text-sm text-slate-900">
+            <p className="font-bold text-slate-900">Evento selecionado</p>
+            <p className="mt-1 font-semibold">{selectedEvent.title}</p>
+            <p className="text-slate-500 text-xs">
+              {selectedEvent.date} • {selectedEvent.price}
+            </p>
+          </div>
+        )}
 
         <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit} noValidate>
           {submitFeedback && (
@@ -352,10 +389,17 @@ export default function Cadastro() {
             )}
           </div>
 
-          <div className="flex items-center gap-2 py-2">
-            <input type="checkbox" className="shrink-0 rounded border-slate-200 text-primary focus:ring-primary" id="terms" />
+          <div className="flex items-start gap-2 py-2">
+            <input
+              type="checkbox"
+              id="terms"
+              checked={termsAccepted}
+              onChange={(e) => setTermsAccepted(e.target.checked)}
+              className="shrink-0 rounded border-slate-200 text-primary focus:ring-primary mt-0.5"
+              aria-required="true"
+            />
             <label htmlFor="terms" className="text-[12px] text-slate-500 leading-tight">
-              Eu concordo com os <Link to="/termos" target="_blank" rel="noreferrer" className="text-primary font-bold hover:underline">Termos de Uso</Link> e a <Link to="/privacidade" target="_blank" rel="noreferrer" className="text-primary font-bold hover:underline">Politica de Privacidade</Link>.
+              Eu concordo com os <Link to="/termos" target="_blank" rel="noreferrer" className="text-primary font-bold hover:underline">Termos de Uso</Link> e a <Link to="/privacidade" target="_blank" rel="noreferrer" className="text-primary font-bold hover:underline">Politica de Privacidade</Link>. <span className="text-red-600">*</span>
             </label>
           </div>
 

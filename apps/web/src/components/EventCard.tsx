@@ -17,13 +17,13 @@ const EventCard: React.FC<EventCardProps> = ({ event, onRegister }) => {
       <Link to={`/evento/${event.id}`} className="aspect-[16/9] overflow-hidden relative block">
         <img
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          src={event.image}
+          src={event.image ?? 'https://images.unsplash.com/photo-1514516870928-48d9fe033f3f?auto=format&fit=crop&w=1000&q=80'}
           alt={event.title}
           loading="lazy"
         />
         <div aria-hidden="true" className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex justify-between items-start gap-2 pointer-events-none">
           <div className="rounded-full bg-white/90 backdrop-blur-md px-2.5 sm:px-3 py-1 text-[8px] sm:text-[9px] font-black text-slate-900 shadow-sm uppercase tracking-wider">
-            {event.tag}
+            {event.tag ?? 'Evento'}
           </div>
           <div className="rounded-full bg-emerald-500/90 backdrop-blur-md px-2.5 sm:px-3 py-1 text-[8px] sm:text-[9px] font-black text-white shadow-sm uppercase tracking-wider">
             Inscrições Abertas

@@ -14,6 +14,15 @@ import Contato from './pages/Contato';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import EventoDetalhes from './pages/EventoDetalhes';
+import EventExtras from './pages/EventExtras';
+import EventConfirmation from './pages/EventConfirmation';
+import AtletaPainel from './pages/AtletaPainel';
+import AdminDashboard from './pages/AdminDashboard';
+import CreateEvent from './pages/CreateEvent';
+import ManageUsers from './pages/ManageUsers';
+import EventCompetitors from './pages/EventCompetitors';
+import RegisterUser from './pages/RegisterUser';
+import Pagamento from './pages/Pagamento';
 import { motion } from 'motion/react';
 
 function ScrollToTop() {
@@ -96,6 +105,51 @@ export default function App() {
             <Route path="/cadastro" element={
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <Cadastro />
+              </motion.div>
+            } />
+            <Route path="/evento/adicionais" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <EventExtras />
+              </motion.div>
+            } />
+            <Route path="/evento/confirmacao" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <EventConfirmation />
+              </motion.div>
+            } />
+            <Route path="/painel" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <AtletaPainel />
+              </motion.div>
+            } />
+            <Route path="/pagamento" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <Pagamento />
+              </motion.div>
+            } />
+            <Route path="/admin/dashboard" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <AdminDashboard />
+              </motion.div>
+            } />
+            <Route path="/admin/create-event" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <CreateEvent />
+              </motion.div>
+            } />
+            <Route path="/admin/users" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <ManageUsers />
+              </motion.div>
+            } />
+            <Route path="/admin/event/:id/competitors" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <EventCompetitors />
+              </motion.div>
+            } />
+            <Route path="/admin/register-user" element={
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <RegisterUser />
               </motion.div>
             } />
           </Routes>

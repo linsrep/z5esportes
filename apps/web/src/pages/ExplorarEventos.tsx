@@ -5,6 +5,7 @@ import EventCard from '../components/EventCard';
 import Toast from '../components/Toast';
 import { Search, MapPin, Calendar, DollarSign, SlidersHorizontal, Map, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { fetchPublicEvents } from '../services/eventService';
 
 export default function ExplorarEventos() {
   const navigate = useNavigate();
@@ -19,6 +20,17 @@ export default function ExplorarEventos() {
   const [showFilters, setShowFilters] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [registeredEvent, setRegisteredEvent] = useState('');
+  const [events, setEvents] = useState(FEATURED_EVENTS);
+
+  useEffect(() => {
+    fetchPublicEvents().then((data) => {
+      if (data.length > 0) {
+        setEvents(data);
+      }
+    }).catch(() => {
+      setEvents(FEATURED_EVENTS);
+    });
+  }, []);
 
   useEffect(() => {
     if (categoryParam) {
@@ -31,7 +43,7 @@ export default function ExplorarEventos() {
     navigate(`/evento/${event.id}`);
   };
 
-  const filteredEvents = FEATURED_EVENTS.filter(event => {
+  const filteredEvents = events.filter(event => {
     // Category filter from URL
     if (categoryParam) {
       const categoryMap: Record<string, string> = {
@@ -47,7 +59,7 @@ export default function ExplorarEventos() {
         'trail': 'Trail Run'
       };
       const targetTag = categoryMap[categoryParam];
-      if (targetTag && !event.tag.includes(targetTag)) return false;
+      if (targetTag && !event.tag?.includes(targetTag)) return false;
     }
 
     // Basic search by title or location
